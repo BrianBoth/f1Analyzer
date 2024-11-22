@@ -11,7 +11,8 @@ app.get("/", (request, response) => {
 mongoose
   .connect(mongoDBURL)
   .then(() => {
-    console.log("App Connected to Database");
+    const dbName = mongoose.connection.name;
+    console.log(`App Connected to Database: ${dbName}`);
     app.listen(PORT, () => {
       console.log(`App is listening to port ${PORT}`);
     });
