@@ -10,11 +10,20 @@ const app = express();
 // Middleware for parsing request body
 app.use(express.json());
 
-app.use("/", userRoute);
-
 app.get("/", (request, response) => {
   return response.status(234).send("Its Working!");
 });
+
+app.use("/", userRoute);
+
+app.use(
+  cors({
+    origin: "http://localhost:5555",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 mongoose
   .connect(mongoDBURL)
