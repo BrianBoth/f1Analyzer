@@ -1,6 +1,6 @@
 import express from "express";
-import { User } from "./models/userModel.js";
-import { userVideoData } from "./models/videoDataModel.js";
+import { User } from "../models/userModel.js";
+import { userVideoData } from "../models/videoDataModel.js";
 
 const router = express.Router();
 
@@ -53,7 +53,7 @@ router.post("/login", async (request, response) => {
     const user = await User.findOne({ username });
     if (!user) return response.status(404).send({ message: "user not found" });
 
-    const passwordMatch = (user.password = password);
+    const passwordMatch = user.password == password;
     if (!passwordMatch)
       return response
         .status(404)
@@ -61,7 +61,7 @@ router.post("/login", async (request, response) => {
 
     return response.status(200).send({
       message: "Login Successful!",
-      user: { id: user._userID, username: user.username },
+      user: { id: user._id, username: user.username },
     });
   } catch (err) {
     console.log(err);
