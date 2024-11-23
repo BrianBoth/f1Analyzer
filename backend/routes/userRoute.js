@@ -82,7 +82,8 @@ router.get("/data/:id", async (request, response) => {
   }
 });
 
-// Route to edit video entries (need to pass new object entry in body) (EX. "videoData": "???" in body)
+// Route to add new entry (need to pass new object entry in body) (EX. "videoData": "???" in body)
+// may have to put video path into body instead and call/await the twelveCall.js and put that into the newData var
 router.put("/data/:id", async (request, response) => {
   try {
     const { id } = request.params;
