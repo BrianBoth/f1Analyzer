@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 const videoShema = mongoose.Schema({
-  userID: {
+  _id: {
     type: String,
     required: true,
   },
   videoData: {
     type: Array,
-    required: true;
-  }
+    required: true,
+  },
 });
 
 export const userVideoData = mongoose.model("userVideoData", videoShema);
