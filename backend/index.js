@@ -10,15 +10,6 @@ const app = express();
 
 app.use(cors());
 
-// app.use(
-//   cors({
-//     origin: "http://localhost:5555",
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//     credentials: true,
-//   })
-// );
-
 // Middleware for parsing request body
 app.use(express.json());
 
