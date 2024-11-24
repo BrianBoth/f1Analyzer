@@ -32,6 +32,7 @@ const LoginPage = () => {
         navigate(`/data/${id}`);
       } else {
         alert(data.message);
+        e.target.reset();
       }
     } catch (err) {
       console.log(err.message);
@@ -53,10 +54,15 @@ const LoginPage = () => {
         >
           <img
             className="w-8 h-8 mr-2"
-            src="/33998_wheel_icon.ico"
+            src="/android-chrome-192x192.png"
             alt="logo"
           />
           F1 Analyst
+          <img
+            className="w-8 h-8 mr-2"
+            src="/android-chrome-192x192.png"
+            alt="logo"
+          />
         </a>
         <div className="w-full bg-gray-800 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-700 dark:border-gray-600">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

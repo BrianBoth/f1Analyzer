@@ -7,21 +7,26 @@ const router = express.Router();
 // Route to save new user (EX. {username: ???, password: ???, email: ???} in the body)
 router.post("/signup", async (request, response) => {
   try {
-    if (
-      !request.body.username ||
-      !request.body.password ||
-      !request.body.email
-    ) {
+    const { username, password, email } = request.body;
+
+    if (!username || !password || !email) {
       return response.status(400).send({
         message: "Send all required fields: username, password, email",
       });
     }
 
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return response.status(400).send({
+        message: "Username already exists. Please choose a different one.",
+      });
+    }
+
     // create new user and add to user collection
     const newUser = {
-      username: request.body.username,
-      password: request.body.password,
-      email: request.body.email,
+      username,
+      password,
+      email,
     };
     const user = await User.create(newUser);
 
@@ -32,7 +37,7 @@ router.post("/signup", async (request, response) => {
     };
     const data = await userVideoData.create(newUserData);
 
-    return response.status(201).send(user);
+    return response.status(201).send({ id: user._id });
   } catch (err) {
     console.log(err.message);
     response.status(500).send({ message: err.message });
