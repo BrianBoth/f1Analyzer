@@ -18,6 +18,7 @@ function sleep(ms) {
 export const mainTwelveCall = async function (index, filePath) {
   try {
     // Create the index
+    console.log(index, filePath);
     const indexResp = await formIndex(index);
     const INDEX_ID = indexResp._id;
     console.log(`Index created with ID: ${INDEX_ID}`);
@@ -61,6 +62,7 @@ export const mainTwelveCall = async function (index, filePath) {
 
     // maybe add extra video data
     const masterData = {
+      indexInfo: INDEX_ID,
       videoData: playerData,
       raceIMG: linkListRaceTrack,
       cars: linkListCar,

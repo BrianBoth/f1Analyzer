@@ -1,6 +1,7 @@
 import express from "express";
 import { User } from "../models/userModel.js";
 import { userVideoData } from "../models/videoDataModel.js";
+import { mainTwelveCall } from "../twelveLabAPI/twelveCall.js";
 
 const router = express.Router();
 
@@ -34,6 +35,7 @@ router.post("/signup", async (request, response) => {
     const newUserData = {
       _id: user._id,
       videoData: [],
+      indexIDS: [],
     };
     const data = await userVideoData.create(newUserData);
 
@@ -93,19 +95,43 @@ router.put("/addVideo/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
-    const videoData = await userVideoData.findById(id);
+    const indexID = request.body.indexID;
+    const file = request.body.fileData;
+    console.log(indexID, file);
+    const newData = await mainTwelveCall(indexID, file);
+
+    const videoData = await userVideoData.findOne({ _id: id });
     if (!videoData) {
       return response.status(400).send({ message: "Document not found" });
     }
 
-    const newData = request.body.videoData;
-    console.log(request.body);
     videoData.videoData.push(newData);
     await videoData.save();
 
     return response.status(200).send({
       message: "video upload successful!",
-      data: videoData,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return response.status(500).send({ message: err.message });
+  }
+});
+
+router.get("/addVideo/:id", async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    const videoData = await userVideoData.findOne({ _id: id });
+    if (!videoData) {
+      return response.status(400).send({ message: "Document not found" });
+    }
+
+    const indexIDS = videoData["videoData"].map((data) => {
+      if (data) return data["indexInfo"];
+    });
+
+    return response.status(200).send({
+      indexIDArr: indexIDS,
     });
   } catch (err) {
     console.log(err.message);
