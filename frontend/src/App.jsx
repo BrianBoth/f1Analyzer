@@ -5,6 +5,7 @@ import Login from "./pages/LoginPage.jsx";
 import Signup from "./pages/SignupPage.jsx";
 import UserVideos from "./pages/UserVideos.jsx";
 import DisplayVideo from "./pages/DisplayVideo.jsx";
+import AddVideo from "./pages/AddVideo.jsx";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         path="/display/:id"
         element={<DisplayVideo></DisplayVideo>}
       ></Route>
+      <Route path="/addVideo/:id" element={<AddVideo></AddVideo>}></Route>
     </Routes>
   );
 };

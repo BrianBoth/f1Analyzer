@@ -97,7 +97,6 @@ router.put("/addVideo/:id", async (request, response) => {
 
     const indexID = request.body.indexID;
     const file = request.body.fileData;
-    console.log(indexID, file);
     const newData = await mainTwelveCall(indexID, file);
 
     const videoData = await userVideoData.findOne({ _id: id });
@@ -126,8 +125,10 @@ router.get("/addVideo/:id", async (request, response) => {
       return response.status(400).send({ message: "Document not found" });
     }
 
-    const indexIDS = videoData["videoData"].map((data) => {
-      if (data) return data["indexInfo"];
+    const videoDataArr = videoData.videoData;
+
+    const indexIDS = videoDataArr.map((data) => {
+      if (data) return data["indexInfo"]["index_id"];
     });
 
     return response.status(200).send({

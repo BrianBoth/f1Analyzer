@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 import fetch from "node-fetch";
 import { index as formIndex } from "./index.js";
@@ -62,7 +62,7 @@ export const mainTwelveCall = async function (index, filePath) {
 
     // maybe add extra video data
     const masterData = {
-      indexInfo: INDEX_ID,
+      indexInfo: videoData,
       videoData: playerData,
       raceIMG: linkListRaceTrack,
       cars: linkListCar,

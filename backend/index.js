@@ -5,7 +5,6 @@ import { User } from "./models/userModel.js";
 import { userVideoData } from "./models/videoDataModel.js";
 import userRoute from "./routes/userRoute.js";
 import cors from "cors";
-import fs from "fs";
 
 const app = express();
 

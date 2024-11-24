@@ -4,7 +4,7 @@ import axios from "axios";
 import fs from "fs";
 import FormData from "form-data";
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 export const upload = async (INDEX_ID, file) => {
   const formData = new FormData();
@@ -14,15 +14,11 @@ export const upload = async (INDEX_ID, file) => {
   formData.append("disable_video_stream", "false");
   formData.append("index_id", INDEX_ID); // Use the passed INDEX_ID parameter
 
-  // this is from a user uploading a file
-  formData.append("video_file", file);
-
-  // // this shouldn't be a file path theres another way
-  // formData.append(
-  //   "video_file",
-  //   // add video path as parameter
-  //   fs.createReadStream(filePath)
-  // );
+  formData.append(
+    "video_file",
+    // add video path as parameter
+    fs.createReadStream(file)
+  );
 
   const url = "https://api.twelvelabs.io/v1.2/tasks";
   const options = {

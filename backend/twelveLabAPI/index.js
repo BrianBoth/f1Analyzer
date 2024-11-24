@@ -2,7 +2,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 import fetch from "node-fetch";
-dotenv.config();
+dotenv.config({ path: "../.env" });
 
 export const index = async (INDEX_NAME) => {
   const url = "https://api.twelvelabs.io/v1.2/indexes";
