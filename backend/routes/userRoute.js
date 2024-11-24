@@ -78,9 +78,9 @@ router.post("/login", async (request, response) => {
 router.get("/data/:id", async (request, response) => {
   try {
     const { id } = request.params;
-    const videoData = await userVideoData.findById(id);
+    const videoRecord = await userVideoData.findOne({ _id: id });
 
-    return response.status(200).json(videoData);
+    return response.status(200).send({ videoData: videoRecord });
   } catch (err) {
     console.log(err.message);
     return response.status(500).send({ message: err.message });
@@ -89,7 +89,7 @@ router.get("/data/:id", async (request, response) => {
 
 // Route to add new entry (need to pass new object entry in body) (EX. "videoData": "???" in body)
 // may have to put video path into body instead and call/await the twelveCall.js and put that into the newData var
-router.put("/data/:id", async (request, response) => {
+router.put("/addVideo/:id", async (request, response) => {
   try {
     const { id } = request.params;
 

@@ -12,10 +12,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.7",
     "cors": "^2.8.5",
     "express": "^4.21.1",
+    "googleapis": "^144.0.0",
     "mongodb": "^6.10.0",
     "mongoose": "^8.8.2",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "react-router-dom": "^7.0.1"
   }
 }
