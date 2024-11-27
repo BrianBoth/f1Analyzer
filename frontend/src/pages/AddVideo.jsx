@@ -39,21 +39,18 @@ function AddVideo() {
     console.log("Index: ", index);
     console.log("File: ", file);
 
-    const body = {
-      indexID: index,
-      fileData: file,
-    };
+    const data = { index, file };
 
     setLoading(true);
 
     axios
-      .put(`http://localhost:5555/addVideo/${id}`, body, {
+      .put(`http://localhost:5555/addVideo/${id}`, data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((res) => {
-        navigate(`/data/${id}`);
+        navigate(`/displayVideo/${id}`, { state: res.data.videoData });
       })
       .catch((err) => {
         console.log(err.message);
@@ -68,34 +65,69 @@ function AddVideo() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url(/images.jpeg)",
+          backgroundImage:
+            "url(/360_F_590397842_YiRthnetu32IIY7zsDYnFNrmuhDZEwC4.jpg)",
           filter: "blur(5px)",
           zIndex: -1,
         }}
       ></div>
-      <div className="fileContainer flex flex-col mx-auto h-screen items-center justify-center">
-        <form onSubmit={handleUpload} className="">
-          <div>
-            <label className="text-white">Enter Index: </label>
-            <input list="browsers" name="browser" id="browser"></input>
+      <div className="fileContainer flex flex-col mx-auto h-screen items-center justify-center p-6 rounded-lg shadow-lg">
+        <form
+          onSubmit={handleUpload}
+          className="w-full max-w-md bg-black p-6 rounded-lg shadow-md"
+        >
+          <div className="mb-6 flex flex-col">
+            <label
+              htmlFor="browser"
+              className="text-white mb-2 text-sm font-semibold"
+            >
+              Enter Index:
+            </label>
+            <input
+              list="browsers"
+              name="browser"
+              id="browser"
+              placeholder="Insert Index"
+              className="bg-gray-700 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            />
             <datalist id="browsers">
               {indexes.map((index, idx) => (
                 <option key={idx} value={index} />
               ))}
             </datalist>
           </div>
-          <div>
-            <label className="text-white">Upload Relative File Path:</label>
+          <div className="flex flex-col mb-6">
+            <label
+              htmlFor="fileInput"
+              className="text-white mb-2 text-sm font-semibold"
+            >
+              Upload Relative File Path:
+            </label>
             <input
               type="text"
               placeholder="Insert File Path"
               name="fileInput"
+              id="fileInput"
+              className="bg-gray-700 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
             />
+            {/* <input
+              type="file"
+              name="fileInput"
+              className="bg-gray-700 text-white p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            ></input> */}
           </div>
-          <button type="submit" className="bg-white">
+          <button
+            type="submit"
+            className="mt-6 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-green-500 transition duration-300"
+          >
             Upload
           </button>
         </form>
+        {loading && (
+          <div className="mt-4">
+            <Spinner />
+          </div>
+        )}
       </div>
     </div>
   );

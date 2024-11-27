@@ -17,6 +17,7 @@ function sleep(ms) {
 // call when they put all form data in front end
 export const mainTwelveCall = async function (index, filePath) {
   try {
+    console.log("main", index, filePath);
     // Create the index
     console.log(index, filePath);
     const indexResp = await formIndex(index);

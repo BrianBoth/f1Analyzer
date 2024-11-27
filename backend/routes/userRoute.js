@@ -2,8 +2,11 @@ import express from "express";
 import { User } from "../models/userModel.js";
 import { userVideoData } from "../models/videoDataModel.js";
 import { mainTwelveCall } from "../twelveLabAPI/twelveCall.js";
+import multer from "multer";
+import { Readable } from "stream";
 
 const router = express.Router();
+const upload = multer();
 
 // Route to save new user (EX. {username: ???, password: ???, email: ???} in the body)
 router.post("/signup", async (request, response) => {
@@ -91,30 +94,36 @@ router.get("/data/:id", async (request, response) => {
 
 // Route to add new entry (need to pass new object entry in body) (EX. "videoData": "???" in body)
 // may have to put video path into body instead and call/await the twelveCall.js and put that into the newData var
-router.put("/addVideo/:id", async (request, response) => {
-  try {
-    const { id } = request.params;
+router.put(
+  "/addVideo/:id",
+  upload.single("file"),
+  async (request, response) => {
+    try {
+      const { id } = request.params;
+      const { index } = request.body;
+      const { file } = request.body;
 
-    const indexID = request.body.indexID;
-    const file = request.body.fileData;
-    const newData = await mainTwelveCall(indexID, file);
+      console.log(index, file);
 
-    const videoData = await userVideoData.findOne({ _id: id });
-    if (!videoData) {
-      return response.status(400).send({ message: "Document not found" });
+      const newData = await mainTwelveCall(index, file);
+
+      const videoData = await userVideoData.findOne({ _id: id });
+      if (!videoData) {
+        return response.status(400).send({ message: "Document not found" });
+      }
+
+      videoData.videoData.push(newData);
+      await videoData.save();
+
+      return response.status(200).send({
+        videoData: newData,
+      });
+    } catch (err) {
+      console.log(err.message);
+      return response.status(500).send({ message: err.message });
     }
-
-    videoData.videoData.push(newData);
-    await videoData.save();
-
-    return response.status(200).send({
-      message: "video upload successful!",
-    });
-  } catch (err) {
-    console.log(err.message);
-    return response.status(500).send({ message: err.message });
   }
-});
+);
 
 router.get("/addVideo/:id", async (request, response) => {
   try {

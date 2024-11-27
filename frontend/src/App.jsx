@@ -19,6 +19,10 @@ const App = () => {
         element={<DisplayVideo></DisplayVideo>}
       ></Route>
       <Route path="/addVideo/:id" element={<AddVideo></AddVideo>}></Route>
+      <Route
+        path="/displayVideo/:id"
+        element={<DisplayVideo></DisplayVideo>}
+      ></Route>
     </Routes>
   );
 };

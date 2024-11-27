@@ -12,13 +12,12 @@ export const upload = async (INDEX_ID, file) => {
   formData.append("provide_transcription", "false");
   formData.append("language", "en");
   formData.append("disable_video_stream", "false");
-  formData.append("index_id", INDEX_ID); // Use the passed INDEX_ID parameter
-
   formData.append(
     "video_file",
     // add video path as parameter
     fs.createReadStream(file)
   );
+  formData.append("index_id", INDEX_ID); // Use the passed INDEX_ID parameter
 
   const url = "https://api.twelvelabs.io/v1.2/tasks";
   const options = {
