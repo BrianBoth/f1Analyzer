@@ -38,8 +38,9 @@ function AddVideo() {
 
     console.log("Index: ", index);
     console.log("File: ", file);
+    const existingIndex = indexes.includes(index);
 
-    const data = { index, file };
+    const data = { index, file, existingIndex };
 
     setLoading(true);
 

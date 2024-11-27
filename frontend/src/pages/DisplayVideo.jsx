@@ -5,11 +5,9 @@ import HLSPlayer from "../components/hls";
 const DisplayVideo = () => {
   const location = useLocation();
   const formData = location.state;
-  const videoURL = formData.indexInfo.hls.video_url;
-
-  useEffect(() => {
-    console.log(formData);
-  }, []);
+  console.log("formmm", formData);
+  const videoURL = formData?.indexInfo?.hls?.video_url;
+  console.log(videoURL);
 
   return (
     <div>

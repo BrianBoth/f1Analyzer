@@ -15,14 +15,18 @@ function sleep(ms) {
 }
 
 // call when they put all form data in front end
-export const mainTwelveCall = async function (index, filePath) {
+export const mainTwelveCall = async function (index, filePath, existingIndex) {
   try {
-    console.log("main", index, filePath);
-    // Create the index
-    console.log(index, filePath);
-    const indexResp = await formIndex(index);
-    const INDEX_ID = indexResp._id;
-    console.log(`Index created with ID: ${INDEX_ID}`);
+    let INDEX_ID;
+    if (!existingIndex) {
+      // Create the index
+      console.log(index, filePath);
+      const indexResp = await formIndex(index);
+      INDEX_ID = indexResp._id;
+      console.log(`Index created with ID: ${INDEX_ID}`);
+    } else {
+      INDEX_ID = index;
+    }
 
     // Upload video using the index ID
     const uploadResp = await uploadVideo(INDEX_ID, filePath);

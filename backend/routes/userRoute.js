@@ -100,12 +100,11 @@ router.put(
   async (request, response) => {
     try {
       const { id } = request.params;
-      const { index } = request.body;
-      const { file } = request.body;
+      const { index, file, existingIndex } = request.body;
 
-      console.log(index, file);
+      console.log(index, file, existingIndex);
 
-      const newData = await mainTwelveCall(index, file);
+      const newData = await mainTwelveCall(index, file, existingIndex);
 
       const videoData = await userVideoData.findOne({ _id: id });
       if (!videoData) {
