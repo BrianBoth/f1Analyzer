@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner.jsx";
@@ -12,6 +12,8 @@ const UserVideos = () => {
   const [loading, setLoading] = useState(false);
   const [clickedCard, setClickedCard] = useState();
   const navigate = useNavigate();
+  const videoRefs = useRef([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     let isMounted = true;
@@ -45,6 +47,22 @@ const UserVideos = () => {
     navigate(`/displayVideo/${id}`, { state: video });
   };
 
+  const handleSearch = (e) => {
+    console.log(videoRefs);
+    const input = e.target.value.toLowerCase();
+    setSearchTerm(input);
+
+    const index = videoData.findIndex((video) =>
+      video?.videoData?.RaceName?.toLowerCase().includes(input)
+    );
+    if (index !== -1 && videoRefs.current[index]) {
+      videoRefs.current[index].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
   return (
     <div className="h-screen">
       <div
@@ -62,6 +80,8 @@ const UserVideos = () => {
           <input
             type="text"
             placeholder="Enter Video Name"
+            value={searchTerm}
+            onChange={handleSearch}
             className="flex-grow ml-2 outline-none text-gray-800 p-1"
           />
         </div>
@@ -78,9 +98,13 @@ const UserVideos = () => {
           .map((video, index) => {
             if (video) {
               return (
-                <div key={index} className="relative">
+                <div
+                  key={index}
+                  className="relative"
+                  ref={(el) => (videoRefs.current[index] = el)}
+                >
                   <div
-                    className="card h-52 w-52 bg-white flex-shrink-0 rounded-2xl flex flex-col items-center justify-end cursor-pointer"
+                    className="card h-60 w-60 bg-white flex-shrink-0 rounded-2xl flex flex-col items-center justify-end cursor-pointer transform hover:scale-105 transition-all duration-300"
                     style={{
                       backgroundImage: video?.raceIMG?.[0]
                         ? `url(${video.raceIMG[0]})`
@@ -91,7 +115,7 @@ const UserVideos = () => {
                     }}
                     onClick={() => handleVideoClick(video)}
                   >
-                    <h2 className="bg-white w-full text-center text-sm font-semibold p-2 rounded-b-2xl">
+                    <h2 className="relative bg-white/90 w-full text-center text-sm font-bold text-gray-800 p-3 rounded-b-3xl">
                       {video?.videoData?.RaceName || "No Race Name"}
                     </h2>
                   </div>
