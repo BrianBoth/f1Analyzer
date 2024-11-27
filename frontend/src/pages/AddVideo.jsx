@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner.jsx";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { MdArrowBack } from "react-icons/md";
 
 function AddVideo() {
   const [indexes, setIndexes] = useState([]);
@@ -61,6 +62,10 @@ function AddVideo() {
       });
   };
 
+  const handleBackClick = () => {
+    navigate(`/data/${id}`);
+  };
+
   return (
     <div className="h-screen">
       <div
@@ -72,6 +77,10 @@ function AddVideo() {
           zIndex: -1,
         }}
       ></div>
+      <span className="flex cursor-pointer" onClick={handleBackClick}>
+        <MdArrowBack className="text-white text-3xl mt-5 ml-5"></MdArrowBack>
+        <h2 className="text-white mt-6 ml-5">Back to Video Collections</h2>
+      </span>
       <div className="fileContainer flex flex-col mx-auto h-screen items-center justify-center p-6 rounded-lg shadow-lg">
         <form
           onSubmit={handleUpload}

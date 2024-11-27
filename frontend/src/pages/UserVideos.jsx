@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner.jsx";
 import { Link } from "react-router-dom";
-import { MdOutlineAddBox, MdSearch } from "react-icons/md";
+import { MdOutlineAddBox, MdSearch, MdArrowBack } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const UserVideos = () => {
@@ -41,14 +41,12 @@ const UserVideos = () => {
       isMounted = false;
     };
   }, [id]);
-  console.log(videoData);
 
   const handleVideoClick = (video) => {
     navigate(`/displayVideo/${id}`, { state: video });
   };
 
   const handleSearch = (e) => {
-    console.log(videoRefs);
     const input = e.target.value.toLowerCase();
     setSearchTerm(input);
 
