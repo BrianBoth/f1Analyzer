@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
-const HLSPlayer = ({ src, width = "640px", height = "360px" }) => {
+const HLSPlayer = ({ src, width = "840px", height = "572px" }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const HLSPlayer = ({ src, width = "640px", height = "360px" }) => {
   }, [src]);
 
   return (
-    <div>
+    <div className="mb-20">
       <video
         ref={videoRef}
         controls
