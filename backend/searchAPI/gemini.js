@@ -5,7 +5,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import fetch from "node-fetch";
 dotenv.config();
 
-// Configure the API key from environment variables
+// Configure the API key from environment variable
 const apiKey = process.env.GEMINI_API_KEY;
 
 // Define the function to interact with the generative AI API
