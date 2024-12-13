@@ -13,7 +13,7 @@ export const generate = async (VIDEO_ID) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      temperature: 0.7,
+      temperature: 0.4,
       stream: false,
       video_id: VIDEO_ID,
       prompt: twelveLabQuery,

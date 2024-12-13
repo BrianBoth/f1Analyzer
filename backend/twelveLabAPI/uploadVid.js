@@ -11,7 +11,7 @@ export const upload = async (INDEX_ID, file) => {
 
   formData.append("provide_transcription", "false");
   formData.append("language", "en");
-  formData.append("disable_video_stream", "false");
+  formData.append("enable_video_stream", "true");
   formData.append(
     "video_file",
     // add video path as parameter

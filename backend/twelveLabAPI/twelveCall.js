@@ -57,6 +57,8 @@ export const mainTwelveCall = async function (index, filePath, existingIndex) {
     const chatBotRes = await generateContent(query);
 
     const cleanedChatBotRes = chatBotRes.replace(/```json|```/g, "");
+    console.log("chatres", chatBotRes);
+    console.log("clean", cleanedChatBotRes);
     // Extracts racers and data
     const playerData = JSON.parse(cleanedChatBotRes);
 

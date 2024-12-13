@@ -14,10 +14,10 @@ export const index = async (INDEX_NAME) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      engines: [
+      models: [
         {
-          engine_options: ["visual", "conversation"],
-          engine_name: "pegasus1.1",
+          model_options: ["visual", "audio"],
+          model_name: "pegasus1.1",
         },
       ],
       index_name: INDEX_NAME,

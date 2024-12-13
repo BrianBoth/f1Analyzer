@@ -39,7 +39,7 @@ export const twelveLabQuery = `Identify and verify cars in frame, ensuring accur
 - Make
 - Model
 - Driver's Name
-- Provide the timestamps for when the specified car is visible on screen
+- Timestamps in seconds for when the car can be seen on screen and when it goes off screen and can no longer be seen. You need to
 Include:
 - Sport Name
 - Competition Name
