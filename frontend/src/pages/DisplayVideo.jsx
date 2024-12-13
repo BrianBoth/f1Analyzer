@@ -9,8 +9,10 @@ const DisplayVideo = () => {
   const location = useLocation();
   const formData = location.state;
   const videoURL = formData?.indexInfo?.hls?.video_url;
+  const drivers = formData?.videoData?.Races;
   const navigate = useNavigate();
   const { id } = useParams();
+  console.log("forms", formData);
 
   const handleBackClick = () => {
     navigate(`/data/${id}`);
@@ -42,7 +44,34 @@ const DisplayVideo = () => {
         </div>
       </div>
       <div className="h-screen flex items-center">
-        <div className="videoDisplay h-2/3 w-60 bg-white ml-44 mb-20"></div>
+        <div className="videoDisplay h-2/3 w-60 bg-white ml-44 mb-20 flex flex-col p-4 gap-4 rounded-lg">
+          {drivers.map((driver, index) => {
+            return (
+              <div
+                className="card h-32 w-full bg-black flex items-center p-4 rounded-lg gap-5 shadow-lg shadow-black/50"
+                key={index}
+              >
+                <img
+                  src={
+                    formData?.racers?.[index]
+                      ? `${formData?.racers?.[index]}`
+                      : "https://via.placeholder.com/150"
+                  }
+                  alt={`Driver ${index}`}
+                  className="max-h-full max-w-full object-contain"
+                />
+                <div className="p-2 flex flex-col gap-2 justify-center">
+                  <h4 className="text-white text-xs font-sans">
+                    {drivers?.[index]?.Car?.Driver}
+                  </h4>
+                  <h2 className="text-white text-5xl">
+                    {drivers?.[index]?.Car?.Number}
+                  </h2>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <HLSPlayer src={videoURL}></HLSPlayer>
       </div>
 
@@ -56,7 +85,6 @@ const DisplayVideo = () => {
               transform: translateX(100%);
             }
           }
-
           .animate-marquee {
             animation: marquee 15s linear infinite;
           }
