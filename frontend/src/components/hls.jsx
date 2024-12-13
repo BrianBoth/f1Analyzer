@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
-const HLSPlayer = ({ src, width = "840px", height = "572px" }) => {
+const HLSPlayer = ({
+  src,
+  width = "840px",
+  height = "572px",
+  onTimeUpdate,
+}) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -24,12 +29,29 @@ const HLSPlayer = ({ src, width = "840px", height = "572px" }) => {
     }
   }, [src]);
 
+  useEffect(() => {
+    const handleTimeUpdate = () => {
+      if (onTimeUpdate && videoRef.current) {
+        const currentTime = videoRef.current.currentTime;
+        onTimeUpdate(currentTime);
+      }
+    };
+
+    const videoElement = videoRef.current;
+    videoElement?.addEventListener("timeupdate", handleTimeUpdate);
+
+    return () => {
+      videoElement?.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, [onTimeUpdate]);
+
   return (
     <div className="mb-20">
       <video
         ref={videoRef}
         controls
         style={{ width, height, backgroundColor: "black" }}
+        id="myVideo"
       ></video>
     </div>
   );
