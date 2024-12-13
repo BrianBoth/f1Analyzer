@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 dotenv.config({ path: "../.env" });
 
 export const uploadData = async (VIDEO_IDENTIFIER) => {
-  const url = `https://api.twelvelabs.io/v1.2/tasks/${VIDEO_IDENTIFIER}`;
+  const url = `https://api.twelvelabs.io/v1.3/tasks/${VIDEO_IDENTIFIER}`;
   const options = {
     method: "GET",
     headers: {

@@ -19,7 +19,7 @@ export const upload = async (INDEX_ID, file) => {
   );
   formData.append("index_id", INDEX_ID); // Use the passed INDEX_ID parameter
 
-  const url = "https://api.twelvelabs.io/v1.2/tasks";
+  const url = "https://api.twelvelabs.io/v1.3/tasks";
   const options = {
     method: "POST",
     headers: {

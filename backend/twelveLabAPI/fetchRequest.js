@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 dotenv.config({ path: "../.env" });
 
 export const generate = async (VIDEO_ID) => {
-  const url = "https://api.twelvelabs.io/v1.2/generate";
+  const url = "https://api.twelvelabs.io/v1.3/generate";
   const options = {
     method: "POST",
     headers: {
