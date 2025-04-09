@@ -13,7 +13,7 @@ F1 Analyzer is built to simplify the complexities of Formula 1 through interacti
 ## ✨ Features
 
 ### 📈 Performance Visualizations  
-Track drivers' pace, tire strategies, pit stops, and race position changes over time with easy-to-read charts.
+Track drivers and race position changes over time with easy-to-read charts.
 
 ### 🧠 Smart Data Breakdown  
 Highlight key moments like overtakes, undercuts, safety car deployments, and tire degradation patterns.
