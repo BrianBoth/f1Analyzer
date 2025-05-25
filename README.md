@@ -15,13 +15,7 @@ F1 Analyzer is built to simplify the complexities of Formula 1 through interacti
 ### 📈 Performance Visualizations  
 Track drivers and race position changes over time with easy-to-read charts.
 
-### 🧠 Smart Data Breakdown  
-Highlight key moments like overtakes, undercuts, safety car deployments, and tire degradation patterns.
-
-### 🔎 Interactive Filtering  
-Filter results by driver, team, circuit, and lap to deep-dive into specific race segments or head-to-head battles.
-
-### 💡 Real-Time Updates (Optional)  
+### 💡 Real-Time Updates
 If connected to live data sources, view dynamic race analytics as the action unfolds.
 
 ### 💻 Responsive Design  
