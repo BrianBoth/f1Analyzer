@@ -19,7 +19,7 @@ Track drivers and race position changes over time with easy-to-read charts.
 If connected to live data sources, view dynamic race analytics as the action unfolds.
 
 ### 💻 Responsive Design  
-Access from any device—desktop, tablet, or mobile—with an interface designed for clarity and speed.
+Access from any device, desktop, tablet, or mobile with an interface designed for clarity and speed.
 
 ---
 
@@ -41,3 +41,4 @@ We’re excited to grow F1 Analyzer with help from the open-source community. He
 
 5. **Review & Merge**  
    Once
+
